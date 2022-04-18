@@ -1,5 +1,4 @@
 local puzzle = {}
-local template = script.square
 local events = {}
 
 local currentSpace = Vector2.new(1, 1)
