@@ -44,9 +44,9 @@ function puzzle:begin(container, options)
 	moves = 0
 	
 	if height > width then -- if the box is taller then resize the height, else resize the width
-		container.Size = UDim2.fromOffset(container.Size.X.Offset, height/width * container.Size.Y.Offset)
+		container.Size = UDim2.fromOffset(container.Size.X.Offset / (height/width), container.Size.Y.Offset)
 	else
-		container.Size = UDim2.fromOffset(width/height * container.Size.X.Offset, container.Size.Y.Offset)
+		container.Size = UDim2.fromOffset(container.Size.X.Offset, container.Size.Y.Offset / (width/height))
 	end
 	
 	local i = 1
@@ -54,13 +54,28 @@ function puzzle:begin(container, options)
 	for y = 1, height do 
 		grid[y] = table.create(width)
 		for x = 1, width do 
-			local square = template:clone()
+			local square = Instance.new("ImageButton")
 			square.Position = UDim2.fromScale(x*(1/width), y*(1/height))
 			square.Size = UDim2.fromScale(1/width, 1/height)
-			square.TextLabel.Text = i
 			square.Name = x.."_"..y
-			square.Visible = true
+			square.BackgroundTransparency = 1
+			square.Image = "rbxassetid://9391056416"
+			square.ScaleType = Enum.ScaleType.Slice
+			square.SliceCenter = Rect.new(256, 256, 256, 256)
+			square.SliceScale = 0.3
+			square.ImageColor3 = Color3.fromRGB(232, 232, 232)
+			square.AnchorPoint = Vector2.new(1, 1)
 			square.Parent = container
+			local label = Instance.new("TextLabel")
+			label.Text = i
+			label.Size = UDim2.fromScale(.6, .6)
+			label.Position = UDim2.fromScale(.5, .5)
+			label.BackgroundTransparency = 1
+			label.TextScaled = true
+			label.Font = Enum.Font.Arial
+			label.AnchorPoint = Vector2.new(.5, .5)
+			label.Parent = square
+			
 			grid[y][x] = square
 			
 			i += 1 -- count up for the text
@@ -244,6 +259,20 @@ puzzle.presets = {
 		info = {
 			Width = 7,
 			Height = 7,
+		},
+	},
+	{
+		name = "4x2",
+		info = {
+			Width = 4,
+			Height = 2,
+		},
+	},
+	{
+		name = "3x4",
+		info = {
+			Width = 3,
+			Height = 4,
 		},
 	},
 }
