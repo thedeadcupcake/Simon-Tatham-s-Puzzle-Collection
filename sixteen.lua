@@ -12,10 +12,10 @@ local arrows = {}
 
 -- translates rotation to direction
 local rotationTable = {
-	[0] = Vector2.new(0, -1),
-	[90] = Vector2.new(1, 0),
-	[180] = Vector2.new(0, 1),
-	[270] = Vector2.new(-1, 0),
+	[180] = Vector2.new(0, -1),
+	[270] = Vector2.new(1, 0),
+	[0] = Vector2.new(0, 1),
+	[90] = Vector2.new(-1, 0),
 }
 
 local function wrap(x, x_min, x_max)
@@ -191,8 +191,8 @@ function puzzle:begin(container, options)
 		local a = Vector2.new(i+1, height)
 		local b = Vector2.new(i+1, 1)
 		
-		arrows.arrows[a] = generateArrow(a + Vector2.new(0, 2), 0, originalContainer)
-		arrows.arrows[b] = generateArrow(b, 180, originalContainer)
+		arrows.arrows[a] = generateArrow(a + Vector2.new(0, 2), 180, originalContainer)
+		arrows.arrows[b] = generateArrow(b, 0, originalContainer)
 		
 		arrows.directions[a] = rotationTable[0]
 		arrows.directions[b] = rotationTable[180]
@@ -202,8 +202,8 @@ function puzzle:begin(container, options)
 		local a = Vector2.new(1, i+1)
 		local b = Vector2.new(width, i+1)
 		
-		arrows.arrows[a] = generateArrow(a, 90, originalContainer)
-		arrows.arrows[b] = generateArrow(b + Vector2.new(2, 0), 270, originalContainer)
+		arrows.arrows[a] = generateArrow(a, 270, originalContainer)
+		arrows.arrows[b] = generateArrow(b + Vector2.new(2, 0), 90, originalContainer)
 		
 		arrows.directions[a] = rotationTable[90]
 		arrows.directions[b] = rotationTable[270]
