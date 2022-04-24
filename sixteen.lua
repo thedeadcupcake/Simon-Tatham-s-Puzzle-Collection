@@ -1,8 +1,6 @@
 local puzzle = {}
 local events = {}
 
-local square = script.arrow
-
 local grid, width, height, moves, statusLabel
 local win = false
 
